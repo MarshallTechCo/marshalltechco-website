@@ -17,7 +17,7 @@ $year   = date('Y');
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marshall TechCo — Your Business Deserves a Proper Website</title>
 <meta name="description" content="Marshall TechCo builds professional websites, e-commerce stores, and digital infrastructure for Malaysian businesses. Hosting, SSL, PWA, SEO — all handled.">
-<meta name="theme-color" content="#050810">
+<meta name="theme-color" content="#ffffff">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Marshall TechCo — Proper Websites for Real Businesses">
@@ -28,7 +28,7 @@ $year   = date('Y');
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Styles -->
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -347,7 +347,7 @@ $year   = date('Y');
       <?php
       $faqs = [
         ['Do I need to buy hosting separately?',
-         'No. All plans include managed hosting on our servers. We handle setup, configuration, and ongoing maintenance.'],
+         'No. All plans include managed hosting on our servers. However, domain names are registered separately and billed annually — pricing varies by extension (.com.my, .com, .my etc.). We will provide the exact domain cost during onboarding based on your preferred domain name.'],
         ['How long does it take to get my website live?',
          'Starter and Business plans typically go live within 24–72 hours after we receive your content. Growth and Enterprise may take 5–10 business days depending on complexity.'],
         ['Can I upgrade my plan later?',

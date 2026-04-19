@@ -23,7 +23,7 @@
   /* ── Main icosahedron ── */
   const icoGeo = new THREE.IcosahedronGeometry(1.4, 1);
   const icoMat = new THREE.MeshBasicMaterial({
-    color: 0x00d4ff, wireframe: true, transparent: true, opacity: 0.25
+    color: 0x60a5fa, wireframe: true, transparent: true, opacity: 0.3
   });
   const ico = new THREE.Mesh(icoGeo, icoMat);
   scene.add(ico);
@@ -31,7 +31,7 @@
   /* ── Inner icosahedron (counter-rotate) ── */
   const innerGeo = new THREE.IcosahedronGeometry(0.85, 1);
   const innerMat = new THREE.MeshBasicMaterial({
-    color: 0x006bcc, wireframe: true, transparent: true, opacity: 0.2
+    color: 0x93c5fd, wireframe: true, transparent: true, opacity: 0.18
   });
   const inner = new THREE.Mesh(innerGeo, innerMat);
   scene.add(inner);
@@ -51,7 +51,7 @@
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const pMat = new THREE.PointsMaterial({ color: 0x00d4ff, size: 0.045, transparent: true, opacity: 0.55 });
+  const pMat = new THREE.PointsMaterial({ color: 0x93c5fd, size: 0.045, transparent: true, opacity: 0.5 });
   const particles = new THREE.Points(pGeo, pMat);
   scene.add(particles);
 
