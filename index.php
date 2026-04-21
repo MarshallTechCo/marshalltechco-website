@@ -17,7 +17,7 @@ $year   = date('Y');
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marshall TechCo — Malaysia's Digital Growth Partner</title>
 <meta name="description" content="Marshall TechCo builds professional websites, e-commerce stores, and digital infrastructure for Malaysian businesses. Hosting, SSL, PWA, SEO — all handled.">
-<meta name="theme-color" content="#1a56db">
+<meta name="theme-color" content="#F97316">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Marshall TechCo — Malaysia's Digital Growth Partner">
@@ -76,32 +76,77 @@ $year   = date('Y');
   <a href="#pricing" class="btn btn-primary" onclick="closeMobile()" style="width:fit-content;margin-top:.5rem">Get Started</a>
 </div>
 
-<!-- ── Hero — full light theme ─────────────────── -->
+<!-- ── Hero ─────────────────────────────────────── -->
 <section id="hero">
+  <div class="hero-blob-bl"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="container">
-    <div class="hero-content">
-      <div class="pill">🇲🇾 Malaysia's Digital Growth Partner</div>
-      <h1>Your Business Deserves a <span>Proper Website</span></h1>
-      <p>We build and manage professional websites, e-commerce stores, and digital infrastructure — so you can focus on running your business, not your tech.</p>
-      <div class="hero-actions">
-        <a href="#pricing" class="btn btn-primary">View Plans →</a>
-        <a href="#contact" class="btn btn-outline">Talk to Us</a>
+    <div class="hero-inner">
+
+      <!-- Left: copy -->
+      <div class="hero-content">
+        <div class="pill">🇲🇾 Malaysia's Digital Growth Partner</div>
+        <h1>Your Business Deserves a <span>Proper Website</span></h1>
+        <p>We build and manage professional websites, e-commerce stores, and digital infrastructure — so you can focus on running your business, not your tech.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary">View Plans →</a>
+          <a href="#contact" class="btn btn-outline">Talk to Us</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num">12+</div>
+            <div class="label">Projects Done</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">3+</div>
+            <div class="label">Years Active</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">100%</div>
+            <div class="label">PWA on All Plans</div>
+          </div>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num">12+</div>
-          <div class="label">Projects Done</div>
+
+      <!-- Right: visual showcase -->
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <div class="hero-card-dot hc-red"></div>
+            <div class="hero-card-dot hc-amber"></div>
+            <div class="hero-card-dot hc-green"></div>
+            <span class="hero-card-label">What's Included</span>
+          </div>
+          <div class="hero-feats">
+            <div class="hero-feat">
+              <div class="hero-feat-icon">🌐</div>
+              <div class="hero-feat-title">Managed Hosting</div>
+              <div class="hero-feat-sub">99.9% uptime SLA</div>
+            </div>
+            <div class="hero-feat">
+              <div class="hero-feat-icon">📱</div>
+              <div class="hero-feat-title">PWA Standard</div>
+              <div class="hero-feat-sub">Installable on any device</div>
+            </div>
+            <div class="hero-feat">
+              <div class="hero-feat-icon">🔒</div>
+              <div class="hero-feat-title">SSL + Security</div>
+              <div class="hero-feat-sub">Free on every plan</div>
+            </div>
+            <div class="hero-feat">
+              <div class="hero-feat-icon">🔍</div>
+              <div class="hero-feat-title">SEO Ready</div>
+              <div class="hero-feat-sub">Google-optimised</div>
+            </div>
+          </div>
         </div>
-        <div class="hero-stat">
-          <div class="num">3+</div>
-          <div class="label">Years Active</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">100%</div>
-          <div class="label">PWA on All Plans</div>
+        <div class="hero-badge-row">
+          <span class="hero-badge">⚡ 24–72hr Launch</span>
+          <span class="hero-badge">💬 WhatsApp Support</span>
+          <span class="hero-badge">🇲🇾 Malaysia-Based</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -176,6 +221,7 @@ $year   = date('Y');
 
 <!-- ── PWA Standard ────────────────────────────── -->
 <section id="pwa">
+  <div class="pwa-circle-bl"></div>
   <div class="container">
     <div class="section-header">
       <div class="pill">PWA Standard</div>

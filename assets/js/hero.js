@@ -1,13 +1,13 @@
-/* Three.js hero — light theme: dark blue wireframe + particles on light bg */
+/* Three.js hero — warm light theme: orange wireframe + particles on cream bg */
 (function () {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0); // fully transparent — CSS gradient shows
+  renderer.setClearColor(0x000000, 0);
 
-  const scene = new THREE.Scene();
+  const scene  = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
   camera.position.set(0, 0, 5);
 
@@ -20,24 +20,24 @@
   resize();
   window.addEventListener('resize', resize);
 
-  /* ── Main icosahedron — dark blue for light bg ── */
+  /* ── Main icosahedron — orange ── */
   const icoGeo = new THREE.IcosahedronGeometry(1.4, 1);
   const icoMat = new THREE.MeshBasicMaterial({
-    color: 0x1a56db, wireframe: true, transparent: true, opacity: 0.22
+    color: 0xF97316, wireframe: true, transparent: true, opacity: 0.20
   });
   const ico = new THREE.Mesh(icoGeo, icoMat);
   scene.add(ico);
 
-  /* ── Inner icosahedron — indigo ── */
+  /* ── Inner icosahedron — amber ── */
   const innerGeo = new THREE.IcosahedronGeometry(0.85, 1);
   const innerMat = new THREE.MeshBasicMaterial({
-    color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.15
+    color: 0xFBBF24, wireframe: true, transparent: true, opacity: 0.15
   });
   const inner = new THREE.Mesh(innerGeo, innerMat);
   scene.add(inner);
 
-  /* ── Particle field — dark blue/indigo, visible on white ── */
-  const COUNT = 280;
+  /* ── Particle field — orange, visible on cream ── */
+  const COUNT     = 260;
   const positions = new Float32Array(COUNT * 3);
   const velocities = [];
   for (let i = 0; i < COUNT; i++) {
@@ -55,7 +55,7 @@
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   const pMat = new THREE.PointsMaterial({
-    color: 0x3b5bdb, size: 0.055, transparent: true, opacity: 0.45
+    color: 0xF97316, size: 0.06, transparent: true, opacity: 0.4
   });
   const particles = new THREE.Points(pGeo, pMat);
   scene.add(particles);
@@ -73,8 +73,8 @@
     requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
 
-    ico.rotation.x = t * 0.12 + my * 0.15;
-    ico.rotation.y = t * 0.18 + mx * 0.15;
+    ico.rotation.x   = t * 0.12 + my * 0.15;
+    ico.rotation.y   = t * 0.18 + mx * 0.15;
     inner.rotation.x = -t * 0.15;
     inner.rotation.y = -t * 0.22;
 
