@@ -15,13 +15,13 @@ $year   = date('Y');
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marshall TechCo — Your Business Deserves a Proper Website</title>
+<title>Marshall TechCo — Malaysia's Digital Growth Partner</title>
 <meta name="description" content="Marshall TechCo builds professional websites, e-commerce stores, and digital infrastructure for Malaysian businesses. Hosting, SSL, PWA, SEO — all handled.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#1a56db">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Marshall TechCo — Proper Websites for Real Businesses">
-<meta property="og:description" content="Professional web hosting, e-commerce, SEO, and WhatsApp integration for your business.">
+<meta property="og:title" content="Marshall TechCo — Malaysia's Digital Growth Partner">
+<meta property="og:description" content="Professional web hosting, e-commerce, PWA, SEO, and WhatsApp integration for Malaysian businesses.">
 <meta property="og:url" content="<?= htmlspecialchars($appUrl) ?>">
 <meta property="og:type" content="website">
 
@@ -44,6 +44,8 @@ $year   = date('Y');
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
+      <li><a href="#pwa">PWA Standard</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="#why-us">Why Us</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#faq">FAQ</a></li>
@@ -64,20 +66,22 @@ $year   = date('Y');
 
 <!-- Mobile nav overlay -->
 <div id="nav-mobile">
-  <a href="#services" onclick="closeMobile()">Services</a>
-  <a href="#why-us"  onclick="closeMobile()">Why Us</a>
-  <a href="#pricing" onclick="closeMobile()">Pricing</a>
-  <a href="#faq"     onclick="closeMobile()">FAQ</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#services"     onclick="closeMobile()">Services</a>
+  <a href="#pwa"          onclick="closeMobile()">PWA Standard</a>
+  <a href="#how-it-works" onclick="closeMobile()">How It Works</a>
+  <a href="#why-us"       onclick="closeMobile()">Why Us</a>
+  <a href="#pricing"      onclick="closeMobile()">Pricing</a>
+  <a href="#faq"          onclick="closeMobile()">FAQ</a>
+  <a href="#contact"      onclick="closeMobile()">Contact</a>
   <a href="#pricing" class="btn btn-primary" onclick="closeMobile()" style="width:fit-content;margin-top:.5rem">Get Started</a>
 </div>
 
-<!-- ── Hero ───────────────────────────────────── -->
+<!-- ── Hero — full light theme ─────────────────── -->
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="container">
     <div class="hero-content">
-      <div class="pill">🇲🇾 Built for Malaysian Businesses</div>
+      <div class="pill">🇲🇾 Malaysia's Digital Growth Partner</div>
       <h1>Your Business Deserves a <span>Proper Website</span></h1>
       <p>We build and manage professional websites, e-commerce stores, and digital infrastructure — so you can focus on running your business, not your tech.</p>
       <div class="hero-actions">
@@ -86,16 +90,16 @@ $year   = date('Y');
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="num">99.9%</div>
-          <div class="label">Uptime SLA</div>
+          <div class="num">12+</div>
+          <div class="label">Projects Done</div>
         </div>
         <div class="hero-stat">
-          <div class="num">24h</div>
-          <div class="label">Setup Time</div>
+          <div class="num">3+</div>
+          <div class="label">Years Active</div>
         </div>
         <div class="hero-stat">
-          <div class="num">RM199</div>
-          <div class="label">Starting Price</div>
+          <div class="num">100%</div>
+          <div class="label">PWA on All Plans</div>
         </div>
       </div>
     </div>
@@ -107,7 +111,7 @@ $year   = date('Y');
   <div class="container">
     <div class="section-header">
       <div class="pill">What We Do</div>
-      <h2>Everything Your Business Needs Online</h2>
+      <h2>Website as a Service</h2>
       <p>From domain to deployment — we manage the full stack so you don't have to touch a single line of code.</p>
     </div>
     <div class="services-grid">
@@ -170,12 +174,94 @@ $year   = date('Y');
   </div>
 </section>
 
+<!-- ── PWA Standard ────────────────────────────── -->
+<section id="pwa">
+  <div class="container">
+    <div class="section-header">
+      <div class="pill">PWA Standard</div>
+      <h2>Progressive Web App — Built Into Every Plan</h2>
+      <p>Your website works like a real app — installable on any device, available offline, and blazing fast. No app store needed.</p>
+    </div>
+    <div class="pwa-grid">
+      <div class="pwa-card">
+        <div class="pwa-icon">📲</div>
+        <h3>Installable on Any Device</h3>
+        <p>Customers can add your site to their home screen on Android or iOS — no app store download required.</p>
+      </div>
+      <div class="pwa-card">
+        <div class="pwa-icon">📶</div>
+        <h3>Works Offline</h3>
+        <p>Service workers cache key pages so your site remains accessible even with no internet connection.</p>
+      </div>
+      <div class="pwa-card">
+        <div class="pwa-icon">⚡</div>
+        <h3>Lightning Fast Loading</h3>
+        <p>Smart caching delivers your pages instantly — load times under 1 second on repeat visits.</p>
+      </div>
+      <div class="pwa-card">
+        <div class="pwa-icon">🔔</div>
+        <h3>Push Notifications</h3>
+        <p>Re-engage customers with promotions, order updates, and announcements sent directly to their device.</p>
+      </div>
+      <div class="pwa-card">
+        <div class="pwa-icon">🏠</div>
+        <h3>Home Screen Icon</h3>
+        <p>Full-screen launch with your own icon and splash screen — indistinguishable from a native app.</p>
+      </div>
+      <div class="pwa-card">
+        <div class="pwa-icon">💰</div>
+        <h3>No App Store Fees</h3>
+        <p>Skip the RM100+/year developer fees and 30% store commission. Your app, your revenue.</p>
+      </div>
+    </div>
+    <p class="pwa-note">✓ PWA is included as <strong>standard on every plan</strong> — Starter through Enterprise.</p>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────── -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="pill">How It Works</div>
+      <h2>From Idea to Live in Days, Not Months</h2>
+      <p>A clear, simple process so you always know what's happening and when.</p>
+    </div>
+    <div class="steps-wrap">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Choose Your Plan</h3>
+        <p>Pick the plan that fits your business size and budget. Not sure? We'll help you decide.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Onboarding Call</h3>
+        <p>A quick call to understand your business, brand, and goals. No tech knowledge needed.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Hand Over Your Content</h3>
+        <p>Send us your logo, photos, and text via WhatsApp or email. We handle the rest.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>We Build It</h3>
+        <p>Our team designs and develops your site. Starter plans go live within 24–72 hours.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h3>Review & Go Live</h3>
+        <p>You review the site, request any changes, and we publish it to your domain. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Why Us ──────────────────────────────────── -->
 <section id="why-us">
   <div class="container">
     <div class="section-header">
       <div class="pill">Why Marshall TechCo</div>
-      <h2>The Right Team for Your Digital Growth</h2>
+      <h2>Built for Malaysia's Business Owners</h2>
       <p>We're not an agency that disappears after launch. We're your long-term tech partner.</p>
     </div>
     <div class="why-grid">
@@ -230,8 +316,8 @@ $year   = date('Y');
   <div class="container">
     <div class="section-header">
       <div class="pill">Pricing</div>
-      <h2>Simple, Transparent Pricing</h2>
-      <p>All plans include hosting, SSL, and managed updates. No hidden fees.</p>
+      <h2>Market-Researched Pricing</h2>
+      <p>All plans include hosting, SSL, PWA, and managed updates. No hidden fees.</p>
     </div>
     <div class="pricing-grid">
 
@@ -247,10 +333,10 @@ $year   = date('Y');
           <li>Domain registration</li>
           <li>Google My Business setup</li>
           <li>WhatsApp chat widget</li>
+          <li>PWA — installable on mobile</li>
           <li>2 content updates/mo</li>
           <li>Monthly traffic report</li>
           <li class="no">E-Commerce</li>
-          <li class="no">PWA</li>
         </ul>
         <a href="#contact" class="btn btn-outline">Get Started</a>
       </div>
@@ -267,6 +353,7 @@ $year   = date('Y');
           <li>Domain registration</li>
           <li>Google My Business setup</li>
           <li>WhatsApp Business integration</li>
+          <li>PWA — installable on mobile</li>
           <li>5 content updates/mo</li>
           <li>SEO on-page optimisation</li>
           <li>Backup & uptime monitoring</li>
@@ -362,6 +449,8 @@ $year   = date('Y');
          'Yes. If you already own a domain, we\'ll help you point it to our servers at no extra cost.'],
         ['Do you offer website redesigns for existing sites?',
          'Yes. Contact us with your current site and requirements — we\'ll provide a custom quote for the redesign and migration.'],
+        ['What is a PWA and why does it matter?',
+         'A Progressive Web App (PWA) lets your website behave like a native mobile app — customers can install it to their home screen, use it offline, and receive push notifications. Every Marshall TechCo plan includes PWA at no extra cost, while competitors charge separately for it.'],
       ];
       foreach ($faqs as $i => [$q, $a]): ?>
       <div class="faq-item" id="faq-<?= $i ?>">
@@ -384,7 +473,7 @@ $year   = date('Y');
     <div class="contact-wrap">
       <div class="contact-info">
         <div class="pill" style="margin-bottom:1rem">Get in Touch</div>
-        <h2>Let's Build Something Proper</h2>
+        <h2>Ready to Grow Your Business Online?</h2>
         <p>Tell us what your business needs. We'll get back to you within 1 business day.</p>
         <div class="contact-links">
           <a href="mailto:marshall@marshalltechco.com" class="contact-link">
@@ -469,14 +558,15 @@ $year   = date('Y');
         <ul>
           <li><a href="#services">Web Hosting</a></li>
           <li><a href="#services">E-Commerce</a></li>
+          <li><a href="#pwa">PWA Standard</a></li>
           <li><a href="#services">SEO</a></li>
-          <li><a href="#services">PWA</a></li>
           <li><a href="#services">WhatsApp Integration</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
           <li><a href="#why-us">Why Us</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#faq">FAQ</a></li>
