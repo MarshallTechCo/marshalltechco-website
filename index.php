@@ -1,5 +1,4 @@
 <?php
-/* Load .env if present */
 if (file_exists(__DIR__ . '/.env')) {
     foreach (file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
         if (str_starts_with(trim($line), '#') || !str_contains($line, '=')) continue;
@@ -15,27 +14,86 @@ $year   = date('Y');
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marshall TechCo — Malaysia's Digital Growth Partner</title>
-<meta name="description" content="Marshall TechCo builds professional websites, e-commerce stores, and digital infrastructure for Malaysian businesses. Hosting, SSL, PWA, SEO — all handled.">
+<title>Marshall TechCo — SaaS Products for Malaysian Businesses</title>
+<meta name="description" content="Marshall TechCo builds vertical SaaS products for Malaysian SMEs — MarshallERP (B2B), InsureDesk, PropDesk, and more. Affordable, mobile-first, built for Malaysia.">
 <meta name="theme-color" content="#F97316">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Marshall TechCo — Malaysia's Digital Growth Partner">
-<meta property="og:description" content="Professional web hosting, e-commerce, PWA, SEO, and WhatsApp integration for Malaysian businesses.">
+<meta property="og:title" content="Marshall TechCo — SaaS Products for Malaysian Businesses">
+<meta property="og:description" content="MarshallERP + Sofuwara vertical apps. Built for Malaysian SMEs.">
 <meta property="og:url" content="<?= htmlspecialchars($appUrl) ?>">
 <meta property="og:type" content="website">
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- Styles -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
+<style>
+/* ── New product-showcase overrides ───────────────────────────── */
+.pill-blue { background: #eff6ff; color: #1d4ed8; border-radius: 100px; padding: .3rem .9rem; font-size: .78rem; font-weight: 700; display: inline-block; letter-spacing: .02em; }
+.pill-orange { background: var(--accent-light); color: var(--accent2); border-radius: 100px; padding: .3rem .9rem; font-size: .78rem; font-weight: 700; display: inline-block; }
+
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 24px; }
+.product-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 20px;
+  padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;
+  transition: transform .2s, box-shadow .2s;
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.08); }
+.product-card--featured { border-color: var(--accent); box-shadow: 0 4px 20px var(--accent-glow); }
+.product-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.product-name { font-size: 1.1rem; font-weight: 800; }
+.product-sub  { font-size: .82rem; color: var(--muted); margin-top: -4px; }
+.product-desc { font-size: .87rem; line-height: 1.6; color: var(--text2); }
+.product-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag { background: var(--accent-light); color: var(--accent2); border-radius: 100px; padding: 2px 10px; font-size: .72rem; font-weight: 600; }
+.tag-blue { background: #eff6ff; color: #1d4ed8; }
+.product-price { font-size: .85rem; font-weight: 700; color: var(--text); margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); }
+.product-price span { font-size: 1.15rem; color: var(--accent); }
+
+.erp-section { background: #0f172a; color: #f8fafc; border-radius: 28px; padding: 60px 48px; }
+.erp-section h2 { color: #fff; }
+.erp-section p  { color: #94a3b8; }
+.erp-modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 32px; }
+.erp-module { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 16px 18px; font-size: .85rem; }
+.erp-module-ic { font-size: 1.3rem; margin-bottom: 6px; }
+.erp-module-name { font-weight: 700; color: #f1f5f9; }
+.erp-module-desc { color: #64748b; font-size: .78rem; margin-top: 3px; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.pricing-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 20px;
+  padding: 32px 28px; display: flex; flex-direction: column; gap: 8px;
+}
+.pricing-card--best { border-color: var(--accent); position: relative; box-shadow: 0 4px 24px var(--accent-glow); }
+.pricing-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: .7rem; font-weight: 800; padding: 3px 14px; border-radius: 0 0 10px 10px; letter-spacing: .05em; white-space: nowrap; }
+.pricing-tier { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.pricing-name { font-size: 1.3rem; font-weight: 800; }
+.pricing-amt  { font-size: 2.2rem; font-weight: 900; color: var(--accent); }
+.pricing-amt span { font-size: .85rem; font-weight: 500; color: var(--muted); }
+.pricing-features { list-style: none; padding: 0; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+.pricing-features li { font-size: .85rem; color: var(--text2); }
+.pricing-features li::before { content: '✓ '; color: var(--accent); font-weight: 700; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+  .erp-section { padding: 40px 24px; }
+}
+
+.stat-highlight { text-align: center; }
+.stat-highlight .num { font-size: 2.4rem; font-weight: 900; color: var(--accent); }
+.stat-highlight .lbl { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+
+.highlight-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 20px; }
+
+.audience-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.audience-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; padding: 22px 20px; }
+.audience-ic { font-size: 1.8rem; margin-bottom: 8px; }
+.audience-name { font-weight: 700; font-size: .95rem; }
+.audience-desc { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+</style>
 </head>
 <body>
 
-<!-- ── Navigation ─────────────────────────────── -->
+<!-- ── Navigation ──────────────────────────────── -->
 <nav>
   <div class="container nav-inner">
     <a href="/" class="nav-logo">
@@ -43,16 +101,15 @@ $year   = date('Y');
       Marshall TechCo
     </a>
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#pwa">PWA Standard</a></li>
-      <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#erp">MarshallERP</a></li>
+      <li><a href="#sofuwara">Sofuwara Apps</a></li>
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="#contact" class="btn btn-outline">Contact</a>
-      <a href="#pricing" class="btn btn-primary">Get Started</a>
+      <a href="#contact" class="btn btn-outline">Talk to Us</a>
+      <a href="#pricing" class="btn btn-primary">View Plans</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -64,295 +121,177 @@ $year   = date('Y');
   </div>
 </nav>
 
-<!-- Mobile nav overlay -->
+<!-- Mobile nav -->
 <div id="nav-mobile">
-  <a href="#services"     onclick="closeMobile()">Services</a>
-  <a href="#pwa"          onclick="closeMobile()">PWA Standard</a>
-  <a href="#how-it-works" onclick="closeMobile()">How It Works</a>
-  <a href="#why-us"       onclick="closeMobile()">Why Us</a>
-  <a href="#pricing"      onclick="closeMobile()">Pricing</a>
-  <a href="#faq"          onclick="closeMobile()">FAQ</a>
-  <a href="#contact"      onclick="closeMobile()">Contact</a>
-  <a href="#pricing" class="btn btn-primary" onclick="closeMobile()" style="width:fit-content;margin-top:.5rem">Get Started</a>
+  <a href="#products"  onclick="closeMobile()">Products</a>
+  <a href="#erp"       onclick="closeMobile()">MarshallERP</a>
+  <a href="#sofuwara"  onclick="closeMobile()">Sofuwara Apps</a>
+  <a href="#pricing"   onclick="closeMobile()">Pricing</a>
+  <a href="#contact"   onclick="closeMobile()">Contact</a>
+  <a href="#pricing" class="btn btn-primary" onclick="closeMobile()" style="width:fit-content;margin-top:.5rem">View Plans</a>
 </div>
 
-<!-- ── Hero ─────────────────────────────────────── -->
+<!-- ── Hero ────────────────────────────────────── -->
 <section id="hero">
   <div class="hero-blob-bl"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="container">
     <div class="hero-inner">
-
-      <!-- Left: copy -->
       <div class="hero-content">
-        <div class="pill">🇲🇾 Malaysia's Digital Growth Partner</div>
-        <h1>Your Business Deserves a <span>Proper Website</span></h1>
-        <p>We build and manage professional websites, e-commerce stores, and digital infrastructure — so you can focus on running your business, not your tech.</p>
+        <div class="pill">🇲🇾 Built for Malaysian Businesses</div>
+        <h1>Products That <span>Grow With</span> Your Business</h1>
+        <p>We build affordable, mobile-first SaaS products — from enterprise ERP to vertical tools for insurance agents, property managers, freelancers, and pet owners.</p>
         <div class="hero-actions">
-          <a href="#pricing" class="btn btn-primary">View Plans →</a>
-          <a href="#contact" class="btn btn-outline">Talk to Us</a>
+          <a href="#products" class="btn btn-primary">Explore Products →</a>
+          <a href="#contact" class="btn btn-outline">Get a Demo</a>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat">
-            <div class="num">12+</div>
-            <div class="label">Projects Done</div>
-          </div>
-          <div class="hero-stat">
-            <div class="num">3+</div>
-            <div class="label">Years Active</div>
-          </div>
-          <div class="hero-stat">
-            <div class="num">100%</div>
-            <div class="label">PWA on All Plans</div>
-          </div>
+          <div class="hero-stat"><div class="num">2</div><div class="label">Product Lines</div></div>
+          <div class="hero-stat"><div class="num">6+</div><div class="label">Industry Apps</div></div>
+          <div class="hero-stat"><div class="num">RM29</div><div class="label">Starts From / mo</div></div>
         </div>
       </div>
-
-      <!-- Right: visual showcase -->
       <div class="hero-visual">
         <div class="hero-card">
           <div class="hero-card-top">
             <div class="hero-card-dot hc-red"></div>
             <div class="hero-card-dot hc-amber"></div>
             <div class="hero-card-dot hc-green"></div>
-            <span class="hero-card-label">What's Included</span>
+            <span class="hero-card-label">Our Product Suite</span>
           </div>
-          <div class="hero-feats">
-            <div class="hero-feat">
-              <div class="hero-feat-icon">🌐</div>
-              <div class="hero-feat-title">Managed Hosting</div>
-              <div class="hero-feat-sub">99.9% uptime SLA</div>
-            </div>
-            <div class="hero-feat">
-              <div class="hero-feat-icon">📱</div>
-              <div class="hero-feat-title">PWA Standard</div>
-              <div class="hero-feat-sub">Installable on any device</div>
-            </div>
-            <div class="hero-feat">
-              <div class="hero-feat-icon">🔒</div>
-              <div class="hero-feat-title">SSL + Security</div>
-              <div class="hero-feat-sub">Free on every plan</div>
-            </div>
-            <div class="hero-feat">
-              <div class="hero-feat-icon">🔍</div>
-              <div class="hero-feat-title">SEO Ready</div>
-              <div class="hero-feat-sub">Google-optimised</div>
-            </div>
+          <ul class="hero-card-list">
+            <li><span class="hc-ic">🏢</span><strong>MarshallERP</strong> — B2B Enterprise ERP</li>
+            <li><span class="hc-ic">🛡️</span><strong>InsureDesk</strong> — Insurance Agent CRM</li>
+            <li><span class="hc-ic">🏠</span><strong>PropDesk</strong> — Property Management</li>
+            <li><span class="hc-ic">📊</span><strong>Charlie</strong> — Freelancer Finance</li>
+            <li><span class="hc-ic">🐾</span><strong>Echo</strong> — Pet Health Tracker</li>
+            <li><span class="hc-ic">🛒</span><strong>StoreDesk</strong> — E-Commerce Admin</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Two-Product Strategy ─────────────────────── -->
+<section id="products" style="padding-top:5rem;padding-bottom:2rem">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="pill" style="margin-bottom:12px">Two Product Lines</div>
+      <h2>One Company, Two Strategies</h2>
+      <p style="max-width:580px;margin:12px auto 0;color:var(--muted);font-size:.95rem">MarshallERP targets B2B enterprises. Sofuwara delivers affordable vertical apps for specific industries.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:0 auto">
+      <div class="product-card product-card--featured" style="padding:32px">
+        <div class="product-icon" style="background:#0f172a;font-size:1.6rem">🏢</div>
+        <div class="product-name" style="font-size:1.4rem">MarshallERP</div>
+        <div class="product-sub">B2B Enterprise Resource Planning</div>
+        <p class="product-desc">Full-stack ERP for Malaysian SMEs and manufacturers. HR, Inventory, Sales, Finance, Procurement, Renewals, and Manufacturing — all in one platform.</p>
+        <div class="product-tags">
+          <span class="tag tag-blue">RM 199–799/mo</span>
+          <span class="tag tag-blue">SME / Manufacturing</span>
+        </div>
+        <a href="#erp" class="btn btn-primary" style="margin-top:16px;width:fit-content">Explore MarshallERP →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-icon" style="background:var(--accent-light);font-size:1.6rem">📱</div>
+        <div class="product-name" style="font-size:1.4rem">Sofuwara Suite</div>
+        <div class="product-sub">Vertical PWA Apps</div>
+        <p class="product-desc">Mobile-first Progressive Web Apps for specific industries. Self-signup, instant setup, no IT department required. Runs on any device, offline-capable.</p>
+        <div class="product-tags">
+          <span class="tag">RM 29–149/mo</span>
+          <span class="tag">6 Industry Apps</span>
+        </div>
+        <a href="#sofuwara" class="btn btn-outline" style="margin-top:16px;width:fit-content">View All Apps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MarshallERP Deep Dive ─────────────────────── -->
+<section id="erp">
+  <div class="container">
+    <div class="erp-section">
+      <div class="two-col" style="margin-bottom:40px">
+        <div>
+          <span class="pill-blue">MarshallERP</span>
+          <h2 style="margin-top:14px">Enterprise-Grade ERP<br>Built for Malaysian SMEs</h2>
+          <p style="margin-top:14px;line-height:1.7">Stop juggling spreadsheets and disconnected tools. MarshallERP brings HR, inventory, procurement, sales, finance, and manufacturing into a single, affordable platform — running on your browser, no installation needed.</p>
+          <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+            <a href="#erp-pricing" class="btn btn-primary">View ERP Plans</a>
+            <a href="#contact" class="btn" style="background:rgba(255,255,255,.1);color:#f1f5f9">Request Demo</a>
           </div>
         </div>
-        <div class="hero-badge-row">
-          <span class="hero-badge">⚡ 24–72hr Launch</span>
-          <span class="hero-badge">💬 WhatsApp Support</span>
-          <span class="hero-badge">🇲🇾 Malaysia-Based</span>
+        <div class="highlight-row">
+          <?php foreach ([
+            ['10+','Modules'],['Real-time','Dashboard'],['Role-based','Permissions'],['Audit','Trail'],
+          ] as $s): ?>
+          <div class="stat-highlight">
+            <div class="num" style="color:#38bdf8"><?= $s[0] ?></div>
+            <div class="lbl"><?= $s[1] ?></div>
+          </div>
+          <?php endforeach; ?>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ── Services ───────────────────────────────── -->
-<section id="services">
-  <div class="container">
-    <div class="section-header">
-      <div class="pill">What We Do</div>
-      <h2>Website as a Service</h2>
-      <p>From domain to deployment — we manage the full stack so you don't have to touch a single line of code.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🌐</div>
-        <h3>Website Hosting</h3>
-        <p>Fast, reliable managed hosting with 99.9% uptime guarantee. Your site stays online — always.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🛒</div>
-        <h3>E-Commerce & Product Management</h3>
-        <p>Full-featured online stores with product catalogue, orders, and payment gateway integration.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔗</div>
-        <h3>Domain Registration & Renewal</h3>
-        <p>Register .com.my, .my, .com and more. We handle renewals so you never lose your domain.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔒</div>
-        <h3>SSL Certificate</h3>
-        <p>HTTPS security for your entire site. Builds trust with customers and improves Google ranking.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📱</div>
-        <h3>Progressive Web App (PWA)</h3>
-        <p>Turn your website into an app-like experience — installable on mobile, works offline, fast as native.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🛡️</div>
-        <h3>Backup & Uptime Monitoring</h3>
-        <p>Daily automated backups and real-time monitoring. We get alerted before your customers do.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔍</div>
-        <h3>SEO & Google Presence</h3>
-        <p>On-page SEO, sitemap, schema markup, and Google Search Console setup to get you found.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">💬</div>
-        <h3>WhatsApp Business & Live Chat</h3>
-        <p>WhatsApp Business integration with chat widget — let customers reach you in one tap.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">✏️</div>
-        <h3>Monthly Content Updates</h3>
-        <p>Send us your updates — new products, promotions, announcements — and we'll publish them for you.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📊</div>
-        <h3>Analytics & Monthly Reports</h3>
-        <p>Google Analytics 4 + monthly traffic summary report delivered to your inbox.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📍</div>
-        <h3>Google My Business Setup</h3>
-        <p>Get your business on Google Maps and local search — essential for walk-in and local customers.</p>
+      <div class="erp-modules-grid">
+        <?php foreach ([
+          ['👥','HR & Payroll',       'Employees, departments, leave, claims'],
+          ['📦','Inventory',          'Items, warehouses, stock transfers, valuation'],
+          ['🛒','Procurement',        'Purchase requests, approval workflows, POs'],
+          ['💰','Finance & Sales',    'Deals, payments, commissions, partners'],
+          ['🏭','Manufacturing',      'BOM, work orders, QC checks (new!)'],
+          ['🔄','Renewals',           'Contract renewals, reminders, history'],
+          ['👷','Task Management',    'Staff tasks, site service, scheduling'],
+          ['📊','Reports',            'Sales, HR, inventory, procurement exports'],
+          ['🔐','Roles & Access',     'Granular module-level permissions'],
+          ['🗄️','Master Data',        'Central lookup tables, configurable'],
+          ['🔔','Notifications',      'In-app alerts + email (SMTP)'],
+          ['📋','Audit Trail',        'Every action logged with timestamp + user'],
+        ] as [$ic,$name,$desc]): ?>
+        <div class="erp-module">
+          <div class="erp-module-ic"><?= $ic ?></div>
+          <div class="erp-module-name"><?= $name ?></div>
+          <div class="erp-module-desc"><?= $desc ?></div>
+        </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── PWA Standard ────────────────────────────── -->
-<section id="pwa">
-  <div class="pwa-circle-bl"></div>
+<!-- ── Sofuwara Apps ─────────────────────────────── -->
+<section id="sofuwara">
   <div class="container">
-    <div class="section-header">
-      <div class="pill">PWA Standard</div>
-      <h2>Progressive Web App — Built Into Every Plan</h2>
-      <p>Your website works like a real app — installable on any device, available offline, and blazing fast. No app store needed.</p>
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="pill" style="margin-bottom:12px">Sofuwara — Vertical Apps</div>
+      <h2>The Right Tool for Your Industry</h2>
+      <p style="max-width:560px;margin:12px auto 0;color:var(--muted);font-size:.95rem">Each app is purpose-built for one industry. No bloat. Just the features you actually use, delivered as a mobile-first PWA.</p>
     </div>
-    <div class="pwa-grid">
-      <div class="pwa-card">
-        <div class="pwa-icon">📲</div>
-        <h3>Installable on Any Device</h3>
-        <p>Customers can add your site to their home screen on Android or iOS — no app store download required.</p>
-      </div>
-      <div class="pwa-card">
-        <div class="pwa-icon">📶</div>
-        <h3>Works Offline</h3>
-        <p>Service workers cache key pages so your site remains accessible even with no internet connection.</p>
-      </div>
-      <div class="pwa-card">
-        <div class="pwa-icon">⚡</div>
-        <h3>Lightning Fast Loading</h3>
-        <p>Smart caching delivers your pages instantly — load times under 1 second on repeat visits.</p>
-      </div>
-      <div class="pwa-card">
-        <div class="pwa-icon">🔔</div>
-        <h3>Push Notifications</h3>
-        <p>Re-engage customers with promotions, order updates, and announcements sent directly to their device.</p>
-      </div>
-      <div class="pwa-card">
-        <div class="pwa-icon">🏠</div>
-        <h3>Home Screen Icon</h3>
-        <p>Full-screen launch with your own icon and splash screen — indistinguishable from a native app.</p>
-      </div>
-      <div class="pwa-card">
-        <div class="pwa-icon">💰</div>
-        <h3>No App Store Fees</h3>
-        <p>Skip the RM100+/year developer fees and 30% store commission. Your app, your revenue.</p>
-      </div>
-    </div>
-    <p class="pwa-note">✓ PWA is included as <strong>standard on every plan</strong> — Starter through Enterprise.</p>
-  </div>
-</section>
-
-<!-- ── How It Works ────────────────────────────── -->
-<section id="how-it-works">
-  <div class="container">
-    <div class="section-header">
-      <div class="pill">How It Works</div>
-      <h2>From Idea to Live in Days, Not Months</h2>
-      <p>A clear, simple process so you always know what's happening and when.</p>
-    </div>
-    <div class="steps-wrap">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <h3>Choose Your Plan</h3>
-        <p>Pick the plan that fits your business size and budget. Not sure? We'll help you decide.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <h3>Onboarding Call</h3>
-        <p>A quick call to understand your business, brand, and goals. No tech knowledge needed.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <h3>Hand Over Your Content</h3>
-        <p>Send us your logo, photos, and text via WhatsApp or email. We handle the rest.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <h3>We Build It</h3>
-        <p>Our team designs and develops your site. Starter plans go live within 24–72 hours.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">5</div>
-        <h3>Review & Go Live</h3>
-        <p>You review the site, request any changes, and we publish it to your domain. Done.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Why Us ──────────────────────────────────── -->
-<section id="why-us">
-  <div class="container">
-    <div class="section-header">
-      <div class="pill">Why Marshall TechCo</div>
-      <h2>Built for Malaysia's Business Owners</h2>
-      <p>We're not an agency that disappears after launch. We're your long-term tech partner.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="icon">⚡</div>
-        <div>
-          <h3>Fast Turnaround</h3>
-          <p>Most websites go live within 24–72 hours. We move quickly without cutting corners.</p>
+    <div class="products-grid">
+      <?php foreach ([
+        ['🛡️','InsureDesk','Insurance Agent CRM','For licensed insurance agents. Manage customers, policies, follow-ups, and PDF uploads. Share policy summaries with clients via link.',['Customer CRM','Policy Tracker','Follow-Up Scheduler','PDF Upload & Parse','Client Share Link'],'RM 49–99/mo','#0ea5e9','#e0f2fe'],
+        ['🏠','PropDesk','Property Management','Malaysian landlords manage properties, tenants, rental payments, utility bills, and maintenance — with a tenant-facing share portal.', ['Property CRUD','Tenant & Lease Tracking','Utility Bills','Rental Income Reports','Tenant Share Portal'],'RM 49–99/mo','#10b981','#d1fae5'],
+        ['📊','Charlie','Freelancer Finance','Personal finance tracker + business invoicing for Malaysian freelancers. Track income, expenses, send invoices (PDF), and manage leads.',['Income & Expense Tracking','Invoice Generator (PDF)','Lead Pipeline','Savings Goals','Multi-currency (MYR)'],'RM 29–59/mo','#8b5cf6','#ede9fe'],
+        ['🐾','Echo','Pet Health Tracker','Malaysian pet owners track daily health activities — meals, meds, grooming, vet visits. Community social feed, meal prep batches, push alerts.',['Multi-pet Profiles','Activity Logging & Calendar','Meal Prep Batches','Community Feed & Follows','Push Notifications'],'RM 59–99/yr','#f59e0b','#fef3c7'],
+        ['🛒','StoreDesk','E-Commerce Admin','(Coming Soon) Product catalogue, order management, inventory sync, and WhatsApp integration for Malaysian online retailers.',['Product Catalogue','Order Management','Stock Sync','WhatsApp Integration','Analytics'],'RM 99–149/mo','#ef4444','#fee2e2'],
+        ['🏢','Aether Pulse','Software House Panel','Internal operations platform — CEO KPI dashboard, agent task management, token usage tracking, and multi-channel communication hub.',['CEO KPI Dashboard','AI Token Tracking','Agent Management','Task Assignment Flow','Slack / WhatsApp Hub'],'Internal','#6366f1','#e0e7ff'],
+      ] as [$ic,$name,$sub,$desc,$features,$price,$color,$bg]): ?>
+      <div class="product-card <?= $price === 'Internal' ? '' : '' ?>">
+        <div class="product-icon" style="background:<?= $bg ?>;color:<?= $color ?>"><?= $ic ?></div>
+        <div class="product-name"><?= $name ?></div>
+        <div class="product-sub"><?= $sub ?></div>
+        <p class="product-desc"><?= $desc ?></p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px">
+          <?php foreach ($features as $f): ?><li style="font-size:.8rem;color:var(--muted)">✓ <?= $f ?></li><?php endforeach; ?>
+        </ul>
+        <div class="product-price">
+          From <span><?= $price ?></span>
+          <?= $price === 'Internal' ? '<span style="font-size:.75rem;color:var(--muted)"> — internal tool</span>' : '' ?>
+          <?= str_contains($price,'Coming') ? '<span style="font-size:.75rem;color:var(--muted)"> — waitlist open</span>' : '' ?>
         </div>
       </div>
-      <div class="why-card">
-        <div class="icon">🇲🇾</div>
-        <div>
-          <h3>Malaysia-Based Support</h3>
-          <p>No overseas call centres. Real support in English and Bahasa Malaysia via WhatsApp.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="icon">🔧</div>
-        <div>
-          <h3>Fully Managed</h3>
-          <p>We handle hosting, updates, security patches, and backups. You just run your business.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="icon">💡</div>
-        <div>
-          <h3>No Technical Knowledge Needed</h3>
-          <p>Built for business owners, not developers. Clear communication, zero jargon.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="icon">📈</div>
-        <div>
-          <h3>Growth-Ready Stack</h3>
-          <p>Start with a simple site, scale to e-commerce, PWA, and custom integrations as you grow.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="icon">🔐</div>
-        <div>
-          <h3>Security First</h3>
-          <p>SSL, firewall rules, brute-force protection, and daily backups on every plan.</p>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -360,334 +299,170 @@ $year   = date('Y');
 <!-- ── Pricing ─────────────────────────────────── -->
 <section id="pricing">
   <div class="container">
-    <div class="section-header">
-      <div class="pill">Pricing</div>
-      <h2>Market-Researched Pricing</h2>
-      <p>All plans include hosting, SSL, PWA, and managed updates. No hidden fees.</p>
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="pill" style="margin-bottom:12px">Pricing</div>
+      <h2>Simple, Affordable Plans</h2>
+      <p style="max-width:520px;margin:12px auto 0;color:var(--muted);font-size:.95rem">No setup fees. Cancel anytime. Malaysian Ringgit pricing — no currency surprises.</p>
     </div>
+
+    <h3 style="margin-bottom:20px;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">MarshallERP</h3>
+    <div class="pricing-grid" style="margin-bottom:48px">
+      <?php foreach ([
+        ['Starter','RM 199','/mo','Core modules (HR, Finance, Sales, Dashboard)','For small businesses (≤20 staff)',['HR & Payroll','Inventory','Sales & CRM','Finance','Basic Reports','5 User Seats'],false],
+        ['Professional','RM 399','/mo','Full module suite including Procurement & Inventory','For growing SMEs (≤50 staff)',['Everything in Starter','Procurement Workflows','Manufacturing (BOM + WO)','Advanced Reports','Renewals Module','20 User Seats'],true],
+        ['Enterprise','RM 799','/mo','Full suite + manufacturing + priority support','Manufacturers & trading companies',['Everything in Professional','Manufacturing + QC Checks','Multi-warehouse','Priority Support','Unlimited Seats','Custom Branding'],false],
+      ] as [$tier,$amt,$per,$tagline,$who,$features,$best]): ?>
+      <div class="pricing-card <?= $best ? 'pricing-card--best' : '' ?>" style="position:relative">
+        <?php if ($best): ?><div class="pricing-badge">MOST POPULAR</div><?php endif; ?>
+        <div class="pricing-tier"><?= $tier ?></div>
+        <div class="pricing-name">MarshallERP <?= $tier ?></div>
+        <div class="pricing-amt"><?= $amt ?><span><?= $per ?></span></div>
+        <div style="font-size:.82rem;color:var(--muted)"><?= $tagline ?></div>
+        <ul class="pricing-features"><?php foreach ($features as $f): ?><li><?= $f ?></li><?php endforeach; ?></ul>
+        <a href="#contact" class="btn <?= $best ? 'btn-primary' : 'btn-outline' ?>" style="text-align:center;margin-top:auto">Get Started</a>
+      </div>
+      <?php endforeach; ?>
+    </div>
+
+    <h3 style="margin-bottom:20px;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Sofuwara Apps</h3>
     <div class="pricing-grid">
-
-      <!-- Starter -->
-      <div class="pricing-card">
-        <div class="plan">Starter</div>
-        <div class="price">RM199<span>/mo</span></div>
-        <div class="setup">+ RM500 setup fee</div>
-        <hr>
-        <ul>
-          <li>5-page professional website</li>
-          <li>Managed hosting & SSL</li>
-          <li>Domain registration</li>
-          <li>Google My Business setup</li>
-          <li>WhatsApp chat widget</li>
-          <li>PWA — installable on mobile</li>
-          <li>2 content updates/mo</li>
-          <li>Monthly traffic report</li>
-          <li class="no">E-Commerce</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">Get Started</a>
-      </div>
-
-      <!-- Business -->
-      <div class="pricing-card">
-        <div class="plan">Business</div>
-        <div class="price">RM299<span>/mo</span></div>
-        <div class="setup">+ RM800 setup fee</div>
-        <hr>
-        <ul>
-          <li>10-page website</li>
-          <li>Managed hosting & SSL</li>
-          <li>Domain registration</li>
-          <li>Google My Business setup</li>
-          <li>WhatsApp Business integration</li>
-          <li>PWA — installable on mobile</li>
-          <li>5 content updates/mo</li>
-          <li>SEO on-page optimisation</li>
-          <li>Backup & uptime monitoring</li>
-          <li class="no">E-Commerce</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">Get Started</a>
-      </div>
-
-      <!-- Growth (featured) -->
-      <div class="pricing-card featured">
-        <div class="featured-badge">Most Popular</div>
-        <div class="plan">Growth</div>
-        <div class="price">RM449<span>/mo</span></div>
-        <div class="setup">+ RM1,200 setup fee</div>
-        <hr>
-        <ul>
-          <li>Unlimited pages</li>
-          <li>E-Commerce store (up to 100 products)</li>
-          <li>Payment gateway integration</li>
-          <li>PWA — installable on mobile</li>
-          <li>WhatsApp Business integration</li>
-          <li>10 content updates/mo</li>
-          <li>Full SEO suite</li>
-          <li>Analytics & monthly report</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary">Get Started</a>
-      </div>
-
-      <!-- Enterprise -->
-      <div class="pricing-card">
-        <div class="plan">Enterprise</div>
-        <div class="price">RM699<span>/mo</span></div>
-        <div class="setup">+ RM2,000 setup fee</div>
-        <hr>
-        <ul>
-          <li>Unlimited pages & products</li>
-          <li>Full e-commerce suite</li>
-          <li>Custom web application features</li>
-          <li>PWA + offline mode</li>
-          <li>Dedicated account manager</li>
-          <li>Unlimited content updates</li>
-          <li>Advanced SEO & reporting</li>
-          <li>Multi-channel notifications</li>
-          <li>Custom integrations (API)</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">Get Started</a>
-      </div>
-
-      <!-- Custom -->
-      <div class="pricing-card" style="grid-column: 1 / -1; max-width: 480px; margin: 0 auto;">
-        <div class="plan">Custom</div>
-        <div class="price" style="font-size:1.6rem">B.O.R.</div>
-        <div class="setup">Based on requirements</div>
-        <hr>
-        <ul>
-          <li>Fully custom scope & timeline</li>
-          <li>System integrations (ERP, CRM, API)</li>
-          <li>Multi-site or SaaS platforms</li>
-          <li>Dedicated development team</li>
-          <li>SLA agreement</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline">Contact for Quote</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── FAQ ────────────────────────────────────── -->
-<section id="faq">
-  <div class="container">
-    <div class="section-header">
-      <div class="pill">FAQ</div>
-      <h2>Common Questions</h2>
-    </div>
-    <div class="faq-list">
-      <?php
-      $faqs = [
-        ['Do I need to buy hosting separately?',
-         'No. All plans include managed hosting on our servers. However, domain names are registered separately and billed annually — pricing varies by extension (.com.my, .com, .my etc.). We will provide the exact domain cost during onboarding based on your preferred domain name.'],
-        ['How long does it take to get my website live?',
-         'Starter and Business plans typically go live within 24–72 hours after we receive your content. Growth and Enterprise may take 5–10 business days depending on complexity.'],
-        ['Can I upgrade my plan later?',
-         'Yes, you can upgrade at any time. We\'ll adjust your plan and only charge the difference from your next billing cycle.'],
-        ['Do you support local payment gateways like FPX and eWallet?',
-         'Yes. We integrate with Malaysian payment gateways including Billplz, Toyyibpay, Senangpay, and Stripe for international payments.'],
-        ['What happens if my website goes down?',
-         'We monitor all sites 24/7. If an issue is detected, we\'re notified automatically and begin resolving it — often before you\'re even aware. Critical issues are escalated immediately.'],
-        ['Is there a contract or lock-in period?',
-         'Plans are month-to-month. However, the setup fee is non-refundable as it covers design and development work completed upfront.'],
-        ['Can I provide my own domain?',
-         'Yes. If you already own a domain, we\'ll help you point it to our servers at no extra cost.'],
-        ['Do you offer website redesigns for existing sites?',
-         'Yes. Contact us with your current site and requirements — we\'ll provide a custom quote for the redesign and migration.'],
-        ['What is a PWA and why does it matter?',
-         'A Progressive Web App (PWA) lets your website behave like a native mobile app — customers can install it to their home screen, use it offline, and receive push notifications. Every Marshall TechCo plan includes PWA at no extra cost, while competitors charge separately for it.'],
-      ];
-      foreach ($faqs as $i => [$q, $a]): ?>
-      <div class="faq-item" id="faq-<?= $i ?>">
-        <button class="faq-q" onclick="toggleFaq(<?= $i ?>)">
-          <?= htmlspecialchars($q) ?>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <div class="faq-a"><p><?= htmlspecialchars($a) ?></p></div>
+      <?php foreach ([
+        ['InsureDesk','🛡️','RM 49','/mo','Solo Agent',['1 Agent Account','Customer & Policy CRM','Follow-Up Scheduler','PDF Upload','Share Links'],false],
+        ['InsureDesk Agency','🛡️','RM 99','/mo','Agency Plan',['Up to 10 Agents','Manager Dashboard','Team Analytics','All Solo features','Priority Support'],true],
+        ['PropDesk','🏠','RM 49','/mo','Per Manager',['Unlimited Properties','Tenant Management','Utility Bills','Income Reports','Tenant Share Portal'],false],
+        ['Charlie','📊','RM 29','/mo','Freelancer',['Income & Expense','Invoice PDF','Lead Pipeline','Savings Goals','MYR + multi-currency'],false],
+        ['Echo Basic','🐾','RM 59','/yr','3 Pets',['3 Pet Profiles','Full Activity Logs','Meal Prep','Community Feed','Push Notifications'],false],
+        ['Echo Premium','🐾','RM 99','/yr','Unlimited Pets',['Unlimited Pets','All Basic features','Priority Support','Early Access'],false],
+      ] as [$name,$ic,$amt,$per,$tagline,$features,$best]): ?>
+      <div class="pricing-card <?= $best ? 'pricing-card--best' : '' ?>" style="position:relative">
+        <?php if ($best): ?><div class="pricing-badge">BEST VALUE</div><?php endif; ?>
+        <div class="pricing-tier"><?= $ic ?> <?= $name ?></div>
+        <div class="pricing-amt"><?= $amt ?><span><?= $per ?></span></div>
+        <div style="font-size:.82rem;color:var(--muted)"><?= $tagline ?></div>
+        <ul class="pricing-features"><?php foreach ($features as $f): ?><li><?= $f ?></li><?php endforeach; ?></ul>
+        <a href="#contact" class="btn <?= $best ? 'btn-primary' : 'btn-outline' ?>" style="text-align:center;margin-top:auto">Get Started</a>
       </div>
       <?php endforeach; ?>
     </div>
   </div>
 </section>
 
-<!-- ── Contact ─────────────────────────────────── -->
-<section id="contact">
+<!-- ── Who We Build For ──────────────────────────── -->
+<section style="padding:5rem 0">
   <div class="container">
-    <div class="contact-wrap">
-      <div class="contact-info">
-        <div class="pill" style="margin-bottom:1rem">Get in Touch</div>
-        <h2>Ready to Grow Your Business Online?</h2>
-        <p>Tell us what your business needs. We'll get back to you within 1 business day.</p>
-        <div class="contact-links">
-          <a href="mailto:marshall@marshalltechco.com" class="contact-link">
-            <span class="icon">✉️</span>
-            <div>
-              <div class="label">Email</div>
-              <div class="val">marshall@marshalltechco.com</div>
-            </div>
-          </a>
-          <a href="https://wa.me/60" class="contact-link" target="_blank" rel="noopener">
-            <span class="icon">💬</span>
-            <div>
-              <div class="label">WhatsApp</div>
-              <div class="val">Chat with us on WhatsApp</div>
-            </div>
-          </a>
-          <div class="contact-link">
-            <span class="icon">🕐</span>
-            <div>
-              <div class="label">Response Time</div>
-              <div class="val">Within 1 business day</div>
-            </div>
-          </div>
-        </div>
+    <div style="text-align:center;margin-bottom:36px">
+      <h2>Built for Malaysian Business Owners</h2>
+      <p style="color:var(--muted);max-width:500px;margin:10px auto 0;font-size:.95rem">We understand the Malaysian business context — BM/EN bilingual, SST-aware, local payment gateways.</p>
+    </div>
+    <div class="audience-cards">
+      <?php foreach ([
+        ['🏭','Manufacturers','Track BOM, work orders, QC — connect to procurement and inventory in one system.'],
+        ['🛡️','Insurance Agents','Manage every client, policy, and follow-up from your phone — anywhere, anytime.'],
+        ['🏠','Landlords','Track rent, utilities, and maintenance across all your properties with one login.'],
+        ['💼','Freelancers','Invoice clients, track cash flow, and manage leads without an accountant.'],
+        ['🐾','Pet Owners','Track health, meals, and vet visits for all your pets. Share updates with the community.'],
+        ['🏢','SME Owners','Full ERP without the enterprise price tag — HR, inventory, sales, finance, all connected.'],
+      ] as [$ic,$who,$what]): ?>
+      <div class="audience-card">
+        <div class="audience-ic"><?= $ic ?></div>
+        <div class="audience-name"><?= $who ?></div>
+        <div class="audience-desc"><?= $what ?></div>
       </div>
-
-      <div class="contact-form">
-        <div id="form-msg" class="form-msg"></div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">Your Name *</label>
-            <input type="text" id="fname" placeholder="Ahmad Rizal" autocomplete="name">
-          </div>
-          <div class="form-group">
-            <label for="femail">Email Address *</label>
-            <input type="email" id="femail" placeholder="you@example.com" autocomplete="email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="fcompany">Company / Business Name</label>
-          <input type="text" id="fcompany" placeholder="Your Business Sdn Bhd">
-        </div>
-        <div class="form-group">
-          <label for="fservice">Interested In</label>
-          <select id="fservice">
-            <option value="">— Select a service —</option>
-            <option>Starter Plan (RM199/mo)</option>
-            <option>Business Plan (RM299/mo)</option>
-            <option>Growth Plan (RM449/mo)</option>
-            <option>Enterprise Plan (RM699/mo)</option>
-            <option>Custom Quote</option>
-            <option>Website Redesign</option>
-            <option>Just have questions</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="fmessage">Message *</label>
-          <textarea id="fmessage" placeholder="Tell us about your business and what you're looking to build..."></textarea>
-        </div>
-        <button class="btn btn-primary" onclick="submitForm()" style="width:100%;justify-content:center" id="submit-btn">
-          Send Message →
-        </button>
-        <p class="form-notice" style="margin-top:.75rem">We respect your privacy. No spam, ever.</p>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
 
-<!-- ── Footer ─────────────────────────────────── -->
+<!-- ── Contact ───────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <div class="pill" style="margin-bottom:14px">Get in Touch</div>
+        <h2>Ready to get started?</h2>
+        <p>Tell us which product interests you — we'll set up a demo and walk you through the features relevant to your business.</p>
+        <ul class="contact-points">
+          <li>📧 <a href="mailto:marshall@marshalltechco.com">marshall@marshalltechco.com</a></li>
+          <li>🇲🇾 Based in Malaysia</li>
+          <li>⚡ Response within 1 business day</li>
+        </ul>
+      </div>
+      <form class="contact-form" action="/api/contact.php" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="product">Interested In</label>
+          <select id="product" name="product">
+            <option value="">Select a product…</option>
+            <option>MarshallERP</option>
+            <option>InsureDesk</option>
+            <option>PropDesk</option>
+            <option>Charlie</option>
+            <option>Echo</option>
+            <option>StoreDesk</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us about your business and what you need…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────── -->
 <footer>
   <div class="container">
-    <div class="footer-grid">
+    <div class="footer-top">
       <div class="footer-brand">
-        <div class="nav-logo" style="margin-bottom:.75rem">
-          <div class="mark">M</div>
-          Marshall TechCo
+        <div class="nav-logo" style="margin-bottom:10px">
+          <div class="mark">M</div> Marshall TechCo
         </div>
-        <p>Building proper websites and digital infrastructure for Malaysian businesses. Fast, managed, and always online.</p>
+        <p>SaaS products for Malaysian businesses. Affordable, mobile-first, built to last.</p>
       </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">Web Hosting</a></li>
-          <li><a href="#services">E-Commerce</a></li>
-          <li><a href="#pwa">PWA Standard</a></li>
-          <li><a href="#services">SEO</a></li>
-          <li><a href="#services">WhatsApp Integration</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#why-us">Why Us</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      <div class="footer-links">
+        <div>
+          <strong>Products</strong>
+          <a href="#erp">MarshallERP</a>
+          <a href="#sofuwara">InsureDesk</a>
+          <a href="#sofuwara">PropDesk</a>
+          <a href="#sofuwara">Charlie</a>
+          <a href="#sofuwara">Echo</a>
+        </div>
+        <div>
+          <strong>Company</strong>
+          <a href="#products">About</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+          <a href="mailto:marshall@marshalltechco.com">Support</a>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© <?= $year ?> Marshall TechCo. All rights reserved.</span>
-      <span>Made with care in Malaysia 🇲🇾</span>
+      <span>Built in Malaysia 🇲🇾</span>
     </div>
   </div>
 </footer>
 
-<!-- Three.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.min.js"></script>
 <script src="/assets/js/hero.js"></script>
-
 <script>
-/* ── Mobile nav ── */
 function closeMobile() { document.getElementById('nav-mobile').classList.remove('open'); }
-document.getElementById('hamburger').addEventListener('click', () => {
+document.getElementById('hamburger')?.addEventListener('click', function() {
   document.getElementById('nav-mobile').classList.toggle('open');
 });
-
-/* ── FAQ accordion ── */
-function toggleFaq(i) {
-  const item = document.getElementById('faq-' + i);
-  item.classList.toggle('open');
-}
-
-/* ── Contact form ── */
-async function submitForm() {
-  const btn = document.getElementById('submit-btn');
-  const msg = document.getElementById('form-msg');
-  msg.className = 'form-msg';
-
-  const name    = document.getElementById('fname').value.trim();
-  const email   = document.getElementById('femail').value.trim();
-  const company = document.getElementById('fcompany').value.trim();
-  const service = document.getElementById('fservice').value;
-  const message = document.getElementById('fmessage').value.trim();
-
-  if (!name || !email || !message) {
-    msg.className = 'form-msg error';
-    msg.textContent = 'Please fill in your name, email, and message.';
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, company, service, message })
-    });
-    const json = await res.json();
-    if (json.success) {
-      msg.className = 'form-msg success';
-      msg.textContent = json.message;
-      ['fname','femail','fcompany','fmessage'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('fservice').selectedIndex = 0;
-    } else {
-      throw new Error(json.error || 'Unknown error');
-    }
-  } catch (e) {
-    msg.className = 'form-msg error';
-    msg.textContent = e.message || 'Something went wrong. Please email us directly.';
-  }
-
-  btn.disabled = false;
-  btn.textContent = 'Send Message →';
-}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', () => { closeMobile(); });
+});
 </script>
 </body>
 </html>
